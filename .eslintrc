@@ -21,7 +21,7 @@
     "@typescript-eslint/require-await": "off",
     "no-shadow": "off",
     "no-console": "off",
-    "no-unused-vars": [2, { "args": "all", "argsIgnorePattern": "^_" }]
+    "class-methods-use-this": "off"
   },
   "settings": {
     "import/parsers": {
