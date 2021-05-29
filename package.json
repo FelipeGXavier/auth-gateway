@@ -8,7 +8,7 @@
     "start": "ts-node src/index.ts",
     "start:watch": "nodemon -e ts --exec \"npm run build && node dist/index\"",
     "migrate:run": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
-    "migrate:revert": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert"
+    "migrate:rollback": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert"
   },
   "author": "",
   "license": "ISC",

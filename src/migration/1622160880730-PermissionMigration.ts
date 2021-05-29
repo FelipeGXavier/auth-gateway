@@ -16,6 +16,10 @@ export default class PermissionMigration1622160880730 implements MigrationInterf
             type: 'varchar(100)',
           },
           {
+            name: 'action',
+            type: 'varchar(50)',
+          },
+          {
             name: 'flag',
             type: 'boolean',
             default: false,

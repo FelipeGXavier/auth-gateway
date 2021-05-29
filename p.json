@@ -1,0 +1,6 @@
+{
+  "name": "Felipe Xavier",
+  "user_id": 231,
+  "role": "hirer",
+  "permissions": ["basic.publish", "basic.storage", "basic.budget", "extra.storage"]
+}
