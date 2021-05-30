@@ -19,9 +19,11 @@
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/no-misused-promises": "off",
     "no-shadow": "off",
     "no-console": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "import/parsers": {

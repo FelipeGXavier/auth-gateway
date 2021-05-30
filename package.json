@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/index.ts",
-    "start:watch": "nodemon -e ts --exec \"npm run build && node dist/index\"",
+    "start:watch": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
     "migrate:run": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "migrate:rollback": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert"
   },
@@ -29,6 +29,7 @@
     "@types/node": "^8.0.29"
   },
   "dependencies": {
+    "@types/express": "^4.17.12",
     "@types/node": "^13.13.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
