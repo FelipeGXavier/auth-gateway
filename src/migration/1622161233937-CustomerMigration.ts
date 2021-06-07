@@ -10,6 +10,8 @@ export default class CustomerMigration1622161233937 implements MigrationInterfac
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'name',

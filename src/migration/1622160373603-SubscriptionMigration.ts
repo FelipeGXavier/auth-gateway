@@ -10,6 +10,8 @@ export default class SubscriptionMigration1622160373603 implements MigrationInte
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'prefix',

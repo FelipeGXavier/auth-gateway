@@ -10,6 +10,8 @@ export default class PermissionMigration1622160880730 implements MigrationInterf
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'target',

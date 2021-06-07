@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getConnection } from 'typeorm';
-import Customer from '../entity/Customer';
+import Customer from '../infra/entity/Customer';
 import flatPermissions from '../service/flatUserPermissions';
 
 export const userRouter = Router();

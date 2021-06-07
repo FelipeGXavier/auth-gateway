@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm';
 import Server from './Server';
-import { userRouter } from './routes/user';
+import { userRouter, authRouter } from './routes';
 
 const initDatabaseConnection = async (): Promise<void> => {
   await createConnection();
@@ -10,6 +10,7 @@ initDatabaseConnection()
   .then(() => {
     const server = new Server();
     server.addRouter(userRouter);
+    server.addRouter(authRouter);
     server
       .start(3000)
       .then(() => console.log('Started'))

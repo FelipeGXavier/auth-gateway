@@ -1,4 +1,4 @@
-import Customer from '../entity/Customer';
+import Customer from '../infra/entity/Customer';
 
 type CustomerPermisson = {
   id: number;
