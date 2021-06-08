@@ -1,18 +1,12 @@
 import { Request, Response, Router } from 'express';
 import { getConnection } from 'typeorm';
 import * as yup from 'yup';
-import { hash } from '../infra/crypt/bcrypt';
+import { compare, hash } from '../infra/crypt/bcrypt';
+import { signToken } from '../infra/crypt/jwt';
+import { CreateAccountRequest, LoginAccountRequest } from '../infra/data/auth';
 import Customer from '../infra/entity/Customer';
 
 export const authRouter = Router();
-
-type CreateAccountRequest = {
-  name: string;
-  login: string;
-  password: string;
-  cpf: string;
-  birth: string;
-};
 
 const signUp = async (req: Request, res: Response) => {
   const schema = yup.object().shape({
@@ -39,4 +33,28 @@ const signUp = async (req: Request, res: Response) => {
   }
 };
 
+const signIn = async (req: Request, res: Response) => {
+  const schema = yup.object().shape({
+    login: yup.string().required(),
+    password: yup.string().required(),
+  });
+  const request: LoginAccountRequest = req.body;
+  if (schema.isValid(request)) {
+    try {
+      const customer = await getConnection().getRepository(Customer).findOneOrFail({ login: request.login });
+      const rightLoginPassword = await compare(request.password, customer.password);
+      if (rightLoginPassword) {
+        res.send({ token: signToken({ name: customer.name, id: customer.id }) });
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (err) {
+      res.sendStatus(400);
+    }
+  } else {
+    res.sendStatus(400);
+  }
+};
+
 authRouter.post('/auth/sign-up', signUp);
+authRouter.post('/auth/sign-in', signIn);

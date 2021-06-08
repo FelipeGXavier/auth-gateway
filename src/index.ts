@@ -2,6 +2,8 @@ import { createConnection } from 'typeorm';
 import Server from './Server';
 import { userRouter, authRouter } from './routes';
 
+require('dotenv').config();
+
 const initDatabaseConnection = async (): Promise<void> => {
   await createConnection();
 };
