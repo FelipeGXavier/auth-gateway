@@ -1,6 +1,6 @@
 import Customer from '../infra/entity/Customer';
 
-type CustomerPermisson = {
+export type CustomerPermisson = {
   id: number;
   name: string;
   modules: string[];

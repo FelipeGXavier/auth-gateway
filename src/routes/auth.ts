@@ -24,13 +24,11 @@ const signUp = async (req: Request, res: Response) => {
       request.password = await hash(request.password);
       const customer = getConnection().getRepository(Customer).create(request);
       await getConnection().getRepository(Customer).save(customer);
-      res.sendStatus(201);
-    } else {
-      res.sendStatus(409);
+      return res.sendStatus(201);
     }
-  } else {
-    res.sendStatus(400);
+    return res.sendStatus(409);
   }
+  return res.sendStatus(400);
 };
 
 const signIn = async (req: Request, res: Response) => {
@@ -44,16 +42,14 @@ const signIn = async (req: Request, res: Response) => {
       const customer = await getConnection().getRepository(Customer).findOneOrFail({ login: request.login });
       const rightLoginPassword = await compare(request.password, customer.password);
       if (rightLoginPassword) {
-        res.send({ token: signToken({ name: customer.name, id: customer.id }) });
-      } else {
-        res.sendStatus(401);
+        return res.send({ token: signToken({ name: customer.name, id: customer.id }) });
       }
+      return res.sendStatus(401);
     } catch (err) {
-      res.sendStatus(400);
+      return res.sendStatus(400);
     }
-  } else {
-    res.sendStatus(400);
   }
+  return res.sendStatus(400);
 };
 
 authRouter.post('/auth/sign-up', signUp);

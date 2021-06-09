@@ -1,6 +1,8 @@
 import { createConnection } from 'typeorm';
+import { Router } from 'express';
 import Server from './Server';
-import { userRouter, authRouter } from './routes';
+import { guardRouter, authRouter } from './routes';
+import { checkAuth } from './infra/middlewares/checkAuth';
 
 require('dotenv').config();
 
@@ -11,8 +13,9 @@ const initDatabaseConnection = async (): Promise<void> => {
 initDatabaseConnection()
   .then(() => {
     const server = new Server();
-    server.addRouter(userRouter);
-    server.addRouter(authRouter);
+    const baseRouter = Router();
+    baseRouter.use('/api', authRouter, guardRouter.use(checkAuth));
+    server.addRouter(baseRouter);
     server
       .start(3000)
       .then(() => console.log('Started'))

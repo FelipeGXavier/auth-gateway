@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { RequestHandler } from 'express';
 
 export default class Server {
   private readonly app;
@@ -15,8 +15,12 @@ export default class Server {
     });
   }
 
-  addRouter(router: express.Router): Server {
-    this.app.use(router);
+  addRouter(router: express.Router, prefix?: string, ...middlewares: RequestHandler[]): Server {
+    if (prefix) {
+      this.app.use(prefix, middlewares, router);
+    } else {
+      this.app.use(router, middlewares);
+    }
     return this;
   }
 }
